@@ -8,7 +8,7 @@ final class FakeCipher implements Cipher {
 	private $encrypt;
 
 	public function __construct(
-		bool $decrypt = true,
+		bool $decrypt = null,
 		bool $deprecated = false,
 		string $encrypt = 'secret'
 	) {
@@ -21,8 +21,10 @@ final class FakeCipher implements Cipher {
 		return $this->encrypt;
 	}
 
-	public function decrypt(string $plain, string $hash): bool {
-		return $this->decrypt;
+    public function decrypt(string $plain, string $hash): bool {
+        if($this->decrypt === null)
+            return $plain == $hash;
+        return $this->decrypt;
 	}
 
 	public function deprecated(string $hash): bool {
