@@ -32,7 +32,12 @@ final class AES256CBC extends Tester\TestCase {
 			)
 		);
 		Assert::false($this->cipher->deprecated(self::ENCRYPTED_TEXT));
+    }
+
+    public function testNotDeprecatedHash() {
+		Assert::false($this->cipher->deprecated(self::ENCRYPTED_TEXT));
 	}
+
 
 	/**
 	 * @dataProvider plainTexts
@@ -56,7 +61,7 @@ final class AES256CBC extends Tester\TestCase {
 		);
 	}
 
-	public function testHashWithLowCost() {
+	public function testDeprecatedCipherBecauseOfLowCost() {
 		Assert::true(
 			$this->cipher->deprecated(
 				'8dd393444045baf2fc34588d4b0728f579937f6219a9270f7abab27d21a527dbe672837193ea40c7bd263657a519f1d0a0fad844edc3de041c9aa78c8653e58b658ac68d79a2cb3613680bfa3fdb6f1c'
