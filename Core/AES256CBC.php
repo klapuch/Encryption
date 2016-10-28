@@ -15,7 +15,7 @@ final class AES256CBC extends AES implements Cipher {
 	public function encrypt(string $plain): string {
 		$iv = $this->iv();
 		$cipherText = openssl_encrypt(
-			$this->hashed($plain),
+			$this->hash($plain),
 			self::CIPHER,
 			$this->key(),
 			OPENSSL_RAW_DATA,
@@ -40,7 +40,7 @@ final class AES256CBC extends AES implements Cipher {
 		return random_bytes(openssl_cipher_iv_length(self::CIPHER));
 	}
 
-	private function hashed(string $plain): string {
+	private function hash(string $plain): string {
 		$hash = password_hash(
 			$plain,
 			self::ALGORITHM,
