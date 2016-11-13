@@ -2,26 +2,27 @@
   "name": "klapuch/encryption",
   "description": "AES256",
   "type": "library",
-  "license": "MIT",
+  "homepage": "https://github.com/klapuch/Encryption",
   "authors": [
-    {
-      "name": "Dominik Klapuch",
-      "email": "klapuchdominik@gmail.com"
-    }
+	{
+	  "name": "Dominik Klapuch",
+	  "email": "klapuchdominik@gmail.com",
+	  "homepage": "https://www.github.com/klapuch",
+	  "role": "Developer"
+	}
   ],
   "require": {
-    "php": ">=7.0",
-    "ext-mbstring": "*"
+	"php": ">=7.0",
+	"ext-mbstring": "*"
   },
   "require-dev": {
-    "nette/tester": "^1.7"
-  },
-  "config": {
-    "optimize-autoloader": true
+	"nette/tester": "^1.7"
   },
   "autoload": {
-    "psr-4": {
-      "Klapuch\\Encryption\\": "Core"
-    }
+	"psr-4": {
+	  "Klapuch\\Encryption\\": [
+	   "Core/"
+	  ]
+	}
   }
 }
