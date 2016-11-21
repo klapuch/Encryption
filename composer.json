@@ -12,10 +12,10 @@
 	}
   ],
   "require": {
-	"php": ">=7.0",
-	"ext-mbstring": "*"
+	"php": ">=7.0"
   },
   "require-dev": {
+    "ext-mbstring": "*",
 	"nette/tester": "^1.7"
   },
   "autoload": {
