@@ -4,11 +4,11 @@ namespace Klapuch\Encryption;
 
 interface Cipher {
 	/**
-	 * Encrypt the given plain text
+	 * Encryption of the given plain text using current cipher
 	 * @param string $plain
 	 * @return string
 	 */
-	public function encrypt(string $plain): string;
+	public function encryption(string $plain): string;
 
 	/**
 	 * Checks whether the plain text is the same as the hash
@@ -16,7 +16,7 @@ interface Cipher {
 	 * @param string $hash
 	 * @return bool
 	 */
-	public function decrypt(string $plain, string $hash): bool;
+	public function decrypted(string $plain, string $hash): bool;
 
 	/**
 	 * Is the given hash too old for the cipher and needs to be changed?

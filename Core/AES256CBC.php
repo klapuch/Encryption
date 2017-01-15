@@ -12,7 +12,7 @@ final class AES256CBC extends AES implements Cipher {
 	const ALGORITHM = PASSWORD_DEFAULT;
 	const CIPHER = 'AES-256-CBC';
 
-	public function encrypt(string $plain): string {
+	public function encryption(string $plain): string {
 		$iv = $this->iv();
 		$cipherText = openssl_encrypt(
 			$this->hash($plain),
@@ -24,13 +24,13 @@ final class AES256CBC extends AES implements Cipher {
 		return bin2hex($iv . $cipherText);
 	}
 
-	public function decrypt(string $plain, string $hash): bool {
-		return password_verify($plain, $this->decrypted($hash));
+	public function decrypted(string $plain, string $hash): bool {
+		return password_verify($plain, $this->decryption($hash));
 	}
 
 	public function deprecated(string $hash): bool {
 		return password_needs_rehash(
-			$this->decrypted($hash),
+			$this->decryption($hash),
 			self::ALGORITHM,
 			['cost' => self::COST]
 		);
@@ -41,17 +41,14 @@ final class AES256CBC extends AES implements Cipher {
 	}
 
 	private function hash(string $plain): string {
-		$hash = password_hash(
+		return password_hash(
 			$plain,
 			self::ALGORITHM,
 			['cost' => self::COST]
 		);
-		if($hash === false)
-			throw new \RuntimeException('Error in creating password');
-		return $hash;
 	}
 
-	private function decrypted(string $hash): string {
+	private function decryption(string $hash): string {
 		$binary = hex2bin($hash);
 		$ivSize = openssl_cipher_iv_length(self::CIPHER);
 		$iv = substr($binary, self::BEGIN, $ivSize);

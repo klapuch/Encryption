@@ -3,31 +3,31 @@ declare(strict_types = 1);
 namespace Klapuch\Encryption;
 
 final class FakeCipher implements Cipher {
-	private $decrypt;
+	private $decrypted;
 	private $deprecated;
-	private $encrypt;
+	private $encryption;
 
 	public function __construct(
-		bool $decrypt = null,
+		bool $decrypted = null,
 		bool $deprecated = false,
-		string $encrypt = 'secret'
+		string $encryption = 'secret'
 	) {
-		$this->decrypt = $decrypt;
+		$this->decrypted = $decrypted;
 		$this->deprecated = $deprecated;
-		$this->encrypt = $encrypt;
+		$this->encryption = $encryption;
 	}
 
-	public function encrypt(string $plain): string {
-		return $this->encrypt;
+	public function encryption(string $plain): string {
+		return $this->encryption;
 	}
 
-    public function decrypt(string $plain, string $hash): bool {
-        if($this->decrypt === null)
-            return $plain == $hash;
-        return $this->decrypt;
+    public function decrypted(string $plain, string $encryption): bool {
+        if($this->decrypted === null)
+            return $plain == $encryption;
+        return $this->decrypted;
 	}
 
-	public function deprecated(string $hash): bool {
+	public function deprecated(string $encryption): bool {
 		return $this->deprecated;
 	}
 }

@@ -24,40 +24,32 @@ final class AES256CBC extends Tester\TestCase {
 		$this->cipher = new Encryption\AES256CBC(self::KEY);
 	}
 
-	public function testCorrectEncryption() {
+	public function testDecrypting() {
 		Assert::true(
-			$this->cipher->decrypt(
-				self::DECRYPTED_TEXT,
-				self::ENCRYPTED_TEXT
-			)
+			$this->cipher->decrypted(self::DECRYPTED_TEXT, self::ENCRYPTED_TEXT)
 		);
-		Assert::false($this->cipher->deprecated(self::ENCRYPTED_TEXT));
     }
 
-    public function testNotDeprecatedHash() {
+    public function testNotDeprecatedEncryption() {
 		Assert::false($this->cipher->deprecated(self::ENCRYPTED_TEXT));
 	}
-
 
 	/**
 	 * @dataProvider plainTexts
 	 */
-	public function testValidFormats($password) {
+	public function testEncryptionLength($password) {
 		Assert::same(
 			self::LENGTH,
-			mb_strlen($this->cipher->encrypt($password), 'UTF-8')
+			mb_strlen($this->cipher->encryption($password), 'UTF-8')
 		);
 	}
 
 	/**
 	 * @dataProvider plainTexts
 	 */
-	public function testCorrectEncryptions($password) {
+	public function testEncrypting($password) {
 		Assert::true(
-			$this->cipher->decrypt(
-				$password,
-				$this->cipher->encrypt($password)
-			)
+			$this->cipher->decrypted($password, $this->cipher->encryption($password))
 		);
 	}
 
