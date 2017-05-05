@@ -6,11 +6,11 @@ namespace Klapuch\Encryption;
  * AES-256-CBC cipher
  */
 final class AES256CBC extends AES implements Cipher {
-	const BEGIN = 0;
-	const MAC_LENGTH = 64;
-	const COST = 12;
-	const ALGORITHM = PASSWORD_DEFAULT;
-	const CIPHER = 'AES-256-CBC';
+	private const BEGIN = 0,
+		MAC_LENGTH = 64;
+	private const COST = 12,
+		ALGORITHM = PASSWORD_DEFAULT,
+		CIPHER = 'AES-256-CBC';
 
 	public function encryption(string $plain): string {
 		$iv = $this->iv();

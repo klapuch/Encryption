@@ -1,7 +1,8 @@
 <?php
+declare(strict_types = 1);
 /**
  * @testCase
- * @phpVersion > 7.0.0
+ * @phpVersion > 7.1
  */
 namespace Klapuch\Encryption\Unit;
 
@@ -9,15 +10,15 @@ use Klapuch\Encryption;
 use Tester;
 use Tester\Assert;
 
-require __DIR__ . '/../../bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 
 final class AES256CBC extends Tester\TestCase {
-	/** @var Encryption\Cipher */
+	/** @var \Klapuch\Encryption\Cipher */
 	private $cipher;
-	const LENGTH = 160;
-	const KEY = '\x1d\x6b\x3e\x91\x66\xdf\xb9\x90\x80\xf5\x03\xac\x6a\x3b\xcd\xae';
-	const ENCRYPTED_TEXT = 'bcad70ccfe7af1ec984f8d99ba137db8d22ff724596e95954267edc1284a21127bda038a115052bf78ef15cebce6879b7d3b7ac1b3d90d1055ec36711759dadfd1e098cf944e250380cab2e3d5befa73';
-	const DECRYPTED_TEXT = '123456';
+	private const LENGTH = 160;
+	private const KEY = '\x1d\x6b\x3e\x91\x66\xdf\xb9\x90\x80\xf5\x03\xac\x6a\x3b\xcd\xae';
+	private const ENCRYPTED_TEXT = 'bcad70ccfe7af1ec984f8d99ba137db8d22ff724596e95954267edc1284a21127bda038a115052bf78ef15cebce6879b7d3b7ac1b3d90d1055ec36711759dadfd1e098cf944e250380cab2e3d5befa73';
+	private const DECRYPTED_TEXT = '123456';
 
 	protected function setUp() {
 		parent::setUp();
@@ -28,9 +29,9 @@ final class AES256CBC extends Tester\TestCase {
 		Assert::true(
 			$this->cipher->decrypted(self::DECRYPTED_TEXT, self::ENCRYPTED_TEXT)
 		);
-    }
+	}
 
-    public function testNotDeprecatedEncryption() {
+	public function testNotDeprecatedEncryption() {
 		Assert::false($this->cipher->deprecated(self::ENCRYPTED_TEXT));
 	}
 
@@ -66,7 +67,7 @@ final class AES256CBC extends Tester\TestCase {
 			[''],
 			['0'],
 			['foo'],
-			[hash('SHA512', time())],
+			[hash('SHA512', (string) time())],
 		];
 	}
 }
